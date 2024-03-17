@@ -1,0 +1,3 @@
+﻿  grav3.cpp
+C:\Users\Wojtek\source\repos\m3_chase\grav3\grav3\grav3.cpp(177,17): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+  grav3.vcxproj -> C:\Users\Wojtek\source\repos\m3_chase\grav3\x64\Debug\grav3.exe
