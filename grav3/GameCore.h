@@ -11,7 +11,7 @@
 #include <cassert>
 
 
-//consts
+// Sta³e
 const int IG_SCREEN_WIDTH = 1000;
 const int IG_SCREEN_HEIGHT = 839;
 const int HEIGHT_RESET = -400;
@@ -24,33 +24,27 @@ const int MENU_HEIGHT = 1000;
 const int RACER_HEIGHT = 70;
 const int MIN_OBSTACLE_SPACING = 300;
 
-
-int borderLeft = 110;
-int borderRight = 960;
-int highScore;
-int MOVE_LEFT = -260;
-int MOVE_RIGHT = 260;
-double speedIncreasePerPoint = 5.5;
-double startGameSpeed = 40;
-double maxSpeed = 500;
-
-//sensitivity
-float sliderWidth = 300.0f;
-float sliderMin = 800.0f;
-float sliderMax = sliderMin + sliderWidth;
-float sliderMiddle = sliderMin + sliderWidth / 2.0f;
-float initialSliderPosition = sliderMiddle - 10;
-float lastSensitivitySliderPosition = initialSliderPosition;
-
-
-//volume
-float volumeBarWidth = 300.0f;
-float volumeBarX = 800.0f;
-float volumeBarY = 200.0f;
-float lastVolumeSliderPosition;
-float globalVolumeLevel = 100.0f;
-
-int lastDifficulty = 1;
+// Deklaracje zmiennych globalnych
+extern int borderLeft;
+extern int borderRight;
+extern int highScore;
+extern int MOVE_LEFT;
+extern int MOVE_RIGHT;
+extern double speedIncreasePerPoint;
+extern double startGameSpeed;
+extern double maxSpeed;
+extern float sliderWidth;
+extern float sliderMin;
+extern float sliderMax;
+extern float sliderMiddle;
+extern float initialSliderPosition;
+extern float lastSensitivitySliderPosition;
+extern float volumeBarWidth;
+extern float volumeBarX;
+extern float volumeBarY;
+extern float lastVolumeSliderPosition;
+extern float globalVolumeLevel;
+extern int lastDifficulty;
 
 struct GameResources
 {

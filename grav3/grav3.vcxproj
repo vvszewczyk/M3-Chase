@@ -133,11 +133,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="grav3.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GameIO.cpp" />
+    <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="GameResources.cpp" />
+    <ClCompile Include="GameCore.cpp" />
     <ClCompile Include="menu.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="grav3.h" />
+    <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GameIO.h" />
+    <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="GameCore.h" />
     <ClInclude Include="menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

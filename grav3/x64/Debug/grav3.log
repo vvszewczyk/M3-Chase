@@ -1,3 +1,8 @@
-﻿  grav3.cpp
-C:\Users\Wojtek\source\repos\m3_chase\grav3\grav3\grav3.cpp(177,17): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
-  grav3.vcxproj -> C:\Users\Wojtek\source\repos\m3_chase\grav3\x64\Debug\grav3.exe
+﻿  GameCore.cpp
+  GameEngine.cpp
+D:\Github\M3-Chase\grav3\GameEngine.cpp(61,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  GameIO.cpp
+  GameLogic.cpp
+  GameResources.cpp
+  Generating Code...
+  grav3.vcxproj -> D:\Github\M3-Chase\x64\Debug\grav3.exe
