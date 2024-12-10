@@ -24,27 +24,29 @@ const int MENU_HEIGHT = 1000;
 const int RACER_HEIGHT = 70;
 const int MIN_OBSTACLE_SPACING = 300;
 
-// Deklaracje zmiennych globalnych
-extern int borderLeft;
-extern int borderRight;
-extern int highScore;
-extern int MOVE_LEFT;
-extern int MOVE_RIGHT;
-extern double speedIncreasePerPoint;
-extern double startGameSpeed;
-extern double maxSpeed;
-extern float sliderWidth;
-extern float sliderMin;
-extern float sliderMax;
-extern float sliderMiddle;
-extern float initialSliderPosition;
-extern float lastSensitivitySliderPosition;
-extern float volumeBarWidth;
-extern float volumeBarX;
-extern float volumeBarY;
-extern float lastVolumeSliderPosition;
-extern float globalVolumeLevel;
-extern int lastDifficulty;
+namespace Core
+{ 
+    extern int borderLeft;
+    extern int borderRight;
+    extern int highScore;
+    extern int MOVE_LEFT;
+    extern int MOVE_RIGHT;
+    extern double speedIncreasePerPoint;
+    extern double startGameSpeed;
+    extern double maxSpeed;
+    extern float sliderWidth;
+    extern float sliderMin;
+    extern float sliderMax;
+    extern float sliderMiddle;
+    extern float initialSliderPosition;
+    extern float lastSensitivitySliderPosition;
+    extern float volumeBarWidth;
+    extern float volumeBarX;
+    extern float volumeBarY;
+    extern float lastVolumeSliderPosition;
+    extern float globalVolumeLevel;
+    extern int lastDifficulty;
+}
 
 struct GameResources
 {

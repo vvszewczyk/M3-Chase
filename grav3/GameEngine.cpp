@@ -4,11 +4,9 @@
 
 bool gaming(sf::RenderWindow& gameWindow)
 {
-
     bool game = true;
     gameWindow.setFramerateLimit(60);
     sf::Clock deltaClock;
-
 
     sf::SoundBuffer crash;
     if (!crash.loadFromFile("assets/crash.wav"))
@@ -36,7 +34,7 @@ bool gaming(sf::RenderWindow& gameWindow)
     //in game music
     sf::Sound inGameSound;
     inGameSound.setBuffer(igSound);
-    inGameSound.setVolume(globalVolumeLevel);
+    inGameSound.setVolume(Core::globalVolumeLevel);
     inGameSound.play();
     inGameSound.setLoop(true);
 
@@ -58,7 +56,7 @@ bool gaming(sf::RenderWindow& gameWindow)
     //setting and initializing game objects
     initializeGameObjects(RacerX, RacerY, Obs1X, Obs1Y, Obs2X, Obs2Y, Obs3X, Obs3Y, Obs4X, Obs4Y);
     score = 0;
-    gameSpeed = startGameSpeed;
+    gameSpeed = Core::startGameSpeed;
     float BackgroundY1 = 0;
     float BackgroundY2 = -IG_SCREEN_HEIGHT;
     Racer.setRotation(90.f);
@@ -67,14 +65,13 @@ bool gaming(sf::RenderWindow& gameWindow)
     Obs3.setRotation(90.f);
     Obs4.setRotation(90.f);
 
-    highScore = readScore("highscore.txt");
+    Core::highScore = readScore("highscore.txt");
     float acc = 0;
     const float drag = 0.8f;
 
     //to start delay
     sf::Clock obstacleResetClock;
     sf::Time obstacleResetTime = sf::seconds(1.0f);
-
 
     while (gameWindow.isOpen())
     {
@@ -84,7 +81,7 @@ bool gaming(sf::RenderWindow& gameWindow)
         std::string stringscore = "";
         std::string stringscore2 = "";
         stringscore = std::to_string(score);
-        stringscore2 = std::to_string(highScore);
+        stringscore2 = std::to_string(Core::highScore);
         std::string textscore2 = "HIGH SCORE: " + stringscore2;
         std::string textscore = "SCORE: " + stringscore;
         sf::Text text2(textscore2, resources.myfont, IG_FONT_SIZE);
@@ -97,7 +94,7 @@ bool gaming(sf::RenderWindow& gameWindow)
         text.setOutlineThickness(2.0f);
 
         //new highscore
-        writeScore((score > highScore) ? score : highScore, "highscore.txt");
+        writeScore((score > Core::highScore) ? score : Core::highScore, "highscore.txt");
 
         //last score
         writeScore(score, "lastscore.txt");
@@ -169,7 +166,7 @@ bool gaming(sf::RenderWindow& gameWindow)
         }
 
         //game difficulty
-        gameSpeed = float(gameSpeedLevel(score, speedIncreasePerPoint, maxSpeed));
+        gameSpeed = float(gameSpeedLevel(score, Core::speedIncreasePerPoint, Core::maxSpeed));
 
         //vehicle steering 
         sf::Event event;
@@ -182,12 +179,12 @@ bool gaming(sf::RenderWindow& gameWindow)
             {
                 if (event.key.code == sf::Keyboard::Left)
                 {
-                    acc += MOVE_LEFT;
+                    acc += Core::MOVE_LEFT;
                 }
 
                 if (event.key.code == sf::Keyboard::Right)
                 {
-                    acc += MOVE_RIGHT;
+                    acc += Core::MOVE_RIGHT;
                 }
 
             }
@@ -196,14 +193,14 @@ bool gaming(sf::RenderWindow& gameWindow)
         acc *= drag;
 
         //walls
-        if (RacerX < borderLeft)
+        if (RacerX < Core::borderLeft)
         {
-            RacerX = float(borderLeft);
+            RacerX = float(Core::borderLeft);
             acc = 0;
         }
-        if (RacerX > borderRight)
+        if (RacerX > Core::borderRight)
         {
-            RacerX = float(borderRight);
+            RacerX = float(Core::borderRight);
             acc = 0;
         }
         if (game == false)
@@ -228,7 +225,7 @@ bool gaming(sf::RenderWindow& gameWindow)
                 Gameover.setScale(sf::Vector2f(0.5, 0.5));
                 Gameover.setPosition(290, 320);
                 inGameSound.stop();
-                GameCrash.setVolume(globalVolumeLevel);
+                GameCrash.setVolume(Core::globalVolumeLevel);
                 GameCrash.play();
                 game = false;
                 break;
