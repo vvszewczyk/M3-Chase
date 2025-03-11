@@ -1,2 +1,2 @@
 ﻿  GameCore.cpp
-D:\Github\M3-Chase\grav3\GameCore.cpp(477,5): error C3861: 'makeMenu': identifier not found
+  grav3.vcxproj -> D:\Github\M3-Chase\x64\Debug\grav3.exe

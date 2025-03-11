@@ -3,33 +3,31 @@
 #include "GameIO.h"
 #include "GameLogic.h"
 
-
 namespace Core
 {
-    int borderLeft = 110;
-    int borderRight = 960;
-    int highScore = 0;
-    int MOVE_LEFT = -260;
-    int MOVE_RIGHT = 260;
-    double speedIncreasePerPoint = 5.5;
-    double startGameSpeed = 40;
-    double maxSpeed = 500;
-    float sliderWidth = 300.0f;
-    float sliderMin = 800.0f;
-    float sliderMax = sliderMin + sliderWidth;
-    float sliderMiddle = sliderMin + sliderWidth / 2.0f;
-    float initialSliderPosition = sliderMiddle - 10;
-    float lastSensitivitySliderPosition = initialSliderPosition;
-    float volumeBarWidth = 300.0f;
-    float volumeBarX = 800.0f;
-    float volumeBarY = 200.0f;
-    float lastVolumeSliderPosition = 0.0f;
-    float globalVolumeLevel = 100.0f;
-    int lastDifficulty = 1;
-}
+int borderLeft = 110;
+int borderRight = 960;
+int highScore = 0;
+int MOVE_LEFT = -260;
+int MOVE_RIGHT = 260;
+double speedIncreasePerPoint = 5.5;
+double startGameSpeed = 40;
+double maxSpeed = 500;
+float sliderWidth = 300.0f;
+float sliderMin = 800.0f;
+float sliderMax = sliderMin + sliderWidth;
+float sliderMiddle = sliderMin + sliderWidth / 2.0f;
+float initialSliderPosition = sliderMiddle - 10;
+float lastSensitivitySliderPosition = initialSliderPosition;
+float volumeBarWidth = 300.0f;
+float volumeBarX = 800.0f;
+float volumeBarY = 200.0f;
+float lastVolumeSliderPosition = 0.0f;
+float globalVolumeLevel = 100.0f;
+int lastDifficulty = 1;
+} // namespace Core
 
-
-void initializeMenuWindow(sf::RenderWindow& MENU, sf::RectangleShape& background, sf::Texture& menuTexture)
+void initializeMenuWindow(sf::RenderWindow &MENU, sf::RectangleShape &background, sf::Texture &menuTexture)
 {
     MENU.create(sf::VideoMode(MENU_WIDTH, MENU_HEIGHT), "M3 Chase", sf::Style::Titlebar | sf::Style::Close);
     MENU.setPosition(sf::Vector2i(160, 0));
@@ -38,7 +36,9 @@ void initializeMenuWindow(sf::RenderWindow& MENU, sf::RectangleShape& background
     background.setTexture(&menuTexture);
 }
 
-void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& menuSound, int& lastScore, sf::RectangleShape& playBackground, sf::Text& pressEnter, sf::RectangleShape& settingsBackground, sf::RectangleShape& aboutBackground, sf::Font font, sf::RectangleShape background)
+void handleMenuEvents(sf::RenderWindow &MENU, MainMenu &mainMenu, sf::Sound &menuSound, int &lastScore,
+                      sf::RectangleShape &playBackground, sf::Text &pressEnter, sf::RectangleShape &settingsBackground,
+                      sf::RectangleShape &aboutBackground, sf::Font font, sf::RectangleShape background)
 {
     while (MENU.isOpen())
     {
@@ -67,16 +67,18 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
 
                 if (event.key.code == sf::Keyboard::Return)
                 {
-                    //option windows
-                    sf::RenderWindow Play(sf::VideoMode(IG_SCREEN_WIDTH, IG_SCREEN_HEIGHT), "M3 Chase", sf::Style::Titlebar | sf::Style::Close);
-                    sf::RenderWindow Options(sf::VideoMode(MENU_WIDTH, MENU_HEIGHT), "M3 Chase", sf::Style::Titlebar | sf::Style::Close);
-                    sf::RenderWindow About(sf::VideoMode(MENU_WIDTH, MENU_HEIGHT), "M3 Chase", sf::Style::Titlebar | sf::Style::Close);
+                    // option windows
+                    sf::RenderWindow Play(sf::VideoMode(IG_SCREEN_WIDTH, IG_SCREEN_HEIGHT), "M3 Chase",
+                                          sf::Style::Titlebar | sf::Style::Close);
+                    sf::RenderWindow Options(sf::VideoMode(MENU_WIDTH, MENU_HEIGHT), "M3 Chase",
+                                             sf::Style::Titlebar | sf::Style::Close);
+                    sf::RenderWindow About(sf::VideoMode(MENU_WIDTH, MENU_HEIGHT), "M3 Chase",
+                                           sf::Style::Titlebar | sf::Style::Close);
                     Play.setPosition(sf::Vector2i(460, 120));
                     Options.setPosition(sf::Vector2i(160, 0));
                     About.setPosition(sf::Vector2i(160, 0));
 
-
-                    //sensitivity
+                    // sensitivity
                     sf::Text sensitivityText("Steering sensitivity", font, OPT_FONT_SIZE);
                     sensitivityText.setPosition(320, 150);
                     sensitivityText.setOutlineColor(sf::Color::Blue);
@@ -89,14 +91,14 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                     sensitivityBar.setPosition(800, 200);
                     sensitivityBar.setFillColor(sf::Color::White);
 
-
-                    //Volume
+                    // Volume
                     sf::Text volumeText("Volume", font, OPT_FONT_SIZE);
                     volumeText.setPosition(590, 260);
                     volumeText.setOutlineColor(sf::Color::Blue);
 
                     sf::CircleShape volumeSlider(15);
-                    float volumeSliderInitialX = Core::volumeBarX + (Core::volumeBarWidth / 2.0f) - (volumeSlider.getRadius());
+                    float volumeSliderInitialX =
+                        Core::volumeBarX + (Core::volumeBarWidth / 2.0f) - (volumeSlider.getRadius());
                     volumeSlider.setFillColor(sf::Color::Blue);
 
                     sf::RectangleShape volumeBar(sf::Vector2f(300, 10));
@@ -105,8 +107,7 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                     volumeSlider.setPosition(volumeSliderInitialX, 303);
                     Core::lastVolumeSliderPosition = volumeSliderInitialX;
 
-
-                    //game difficulty levels
+                    // game difficulty levels
                     sf::Text gameDifficulty("Game difficulty:", font, OPT_FONT_SIZE);
                     gameDifficulty.setPosition(320, 370);
                     gameDifficulty.setOutlineColor(sf::Color::Blue);
@@ -120,7 +121,7 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                     d3.setPosition(1050, 370);
                     d3.setOutlineColor(sf::Color::Blue);
 
-                    //settings selected option and difficulty position
+                    // settings selected option and difficulty position
                     int selectedSlider = 0;
                     int selectedDiff = Core::lastDifficulty;
 
@@ -131,16 +132,16 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
 
                     int x = mainMenu.mainMenuPressed();
 
-                    //play chosen
+                    // play chosen
                     if (x == 0)
                     {
                         menuSound.stop();
                         while (Play.isOpen())
                         {
-                            //minimalize menu
+                            // minimalize menu
                             ShowWindow(hwnd, SW_MINIMIZE);
 
-                            //read scores
+                            // read scores
                             lastScore = readScore("lastscore.txt");
                             Core::highScore = readScore("highscore.txt");
                             sf::Text lScore("LAST SCORE: " + std::to_string(lastScore), font, IG_FONT_SIZE);
@@ -152,7 +153,6 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                             lScore.setPosition(5, 30);
                             hScore.setPosition(5, 0);
 
-
                             sf::Event aevent;
                             while (Play.pollEvent(aevent))
                             {
@@ -160,7 +160,7 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                                 {
                                     Play.close();
 
-                                    //bring back menu
+                                    // bring back menu
                                     ShowWindow(hwnd, SW_NORMAL);
                                 }
                                 if (aevent.type == sf::Event::KeyPressed)
@@ -175,11 +175,11 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                                     if (aevent.key.code == sf::Keyboard::Enter)
                                     {
                                         menuSound.stop();
-                                        //gaming moment
+                                        // gaming moment
                                         bool continueGame = gaming(Play);
                                         if (!continueGame)
                                         {
-                                            //no gaming
+                                            // no gaming
                                             break;
                                         }
                                     }
@@ -195,33 +195,35 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                             Play.display();
                         }
                     }
-                    //settings chosen
+                    // settings chosen
                     if (x == 1)
                     {
 
-                        sensitivitySlider.setPosition(Core::lastSensitivitySliderPosition, sensitivitySlider.getPosition().y);
+                        sensitivitySlider.setPosition(Core::lastSensitivitySliderPosition,
+                                                      sensitivitySlider.getPosition().y);
 
                         float currentVolume = menuSound.getVolume();
-                        float normalizedVolumePosition = (currentVolume / 100.0f) * (volumeBar.getSize().x - volumeSlider.getRadius() * 2);
+                        float normalizedVolumePosition =
+                            (currentVolume / 100.0f) * (volumeBar.getSize().x - volumeSlider.getRadius() * 2);
                         Core::lastVolumeSliderPosition = volumeBar.getPosition().x + normalizedVolumePosition;
                         volumeSlider.setPosition(Core::lastVolumeSliderPosition, volumeSlider.getPosition().y);
 
                         while (Options.isOpen())
                         {
-                            //minimalize menu
+                            // minimalize menu
                             ShowWindow(hwnd, SW_MINIMIZE);
                             sf::Event aevent;
                             while (Options.pollEvent(aevent))
                             {
                                 if (aevent.type == sf::Event::Closed)
                                 {
-                                    //bring back menu
+                                    // bring back menu
                                     ShowWindow(hwnd, SW_NORMAL);
                                     Options.close();
                                 }
                                 if (aevent.type == sf::Event::KeyPressed)
                                 {
-                                    //settings key events
+                                    // settings key events
                                     switch (aevent.key.code)
                                     {
                                     case sf::Keyboard::Escape:
@@ -237,47 +239,49 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                                     case sf::Keyboard::Left:
                                     case sf::Keyboard::Right:
                                         float moveAmount = (aevent.key.code == sf::Keyboard::Left) ? -10.0f : 10.0f;
-                                        //sensitivity
+                                        // sensitivity
                                         if (selectedSlider == 0)
                                         {
                                             sensitivitySlider.move(moveAmount, 0);
                                             float newPos = sensitivitySlider.getPosition().x;
-                                            //update MOVE_LEFT and MOVE_RIGHT
+                                            // update MOVE_LEFT and MOVE_RIGHT
                                             updateMoveValues(newPos);
                                             Core::lastSensitivitySliderPosition = newPos;
                                         }
-                                        //volume
+                                        // volume
                                         else if (selectedSlider == 1)
                                         {
                                             volumeSlider.move(moveAmount, 0);
                                             float newPos = volumeSlider.getPosition().x;
-                                            float volumePositionNormalized = (newPos - volumeBar.getPosition().x) / (volumeBar.getSize().x - volumeSlider.getRadius() * 2);
+                                            float volumePositionNormalized =
+                                                (newPos - volumeBar.getPosition().x) /
+                                                (volumeBar.getSize().x - volumeSlider.getRadius() * 2);
                                             float newVolume = volumePositionNormalized * 100; // [0, 100]
-                                            //range
+                                            // range
                                             newVolume = std::max(0.0f, std::min(100.0f, newVolume));
                                             menuSound.setVolume(newVolume);
                                             Core::globalVolumeLevel = newVolume;
                                             Core::lastVolumeSliderPosition = newPos;
                                         }
-                                        //game difficulty
+                                        // game difficulty
                                         else if (selectedSlider == 2)
                                         {
                                             if (aevent.key.code == sf::Keyboard::Left)
                                             {
                                                 selectedDiff = (selectedDiff - 1 + 3) % 3;
-                                                //easy
+                                                // easy
                                                 if (selectedDiff == 0)
                                                 {
                                                     Core::speedIncreasePerPoint = 1.0;
                                                     Core::maxSpeed = 100;
                                                 }
-                                                //normal
+                                                // normal
                                                 else if (selectedDiff == 1)
                                                 {
                                                     Core::speedIncreasePerPoint = 5.5;
                                                     Core::maxSpeed = 500;
                                                 }
-                                                //frog
+                                                // frog
                                                 else
                                                 {
                                                     Core::speedIncreasePerPoint = 100.0;
@@ -288,19 +292,19 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                                             else if (aevent.key.code == sf::Keyboard::Right)
                                             {
                                                 selectedDiff = (selectedDiff + 1) % 3;
-                                                //easy
+                                                // easy
                                                 if (selectedDiff == 0)
                                                 {
                                                     Core::speedIncreasePerPoint = 1.0;
                                                     Core::maxSpeed = 100;
                                                 }
-                                                //normal
+                                                // normal
                                                 else if (selectedDiff == 1)
                                                 {
                                                     Core::speedIncreasePerPoint = 5.5;
                                                     Core::maxSpeed = 500;
                                                 }
-                                                //frog
+                                                // frog
                                                 else
                                                 {
                                                     Core::speedIncreasePerPoint = 100.0;
@@ -312,39 +316,47 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                                         break;
                                     }
 
-                                    //sensitivity slider range
+                                    // sensitivity slider range
                                     if (sensitivitySlider.getPosition().x < sensitivityBar.getPosition().x)
                                     {
-                                        sensitivitySlider.setPosition(sensitivityBar.getPosition().x, sensitivitySlider.getPosition().y);
+                                        sensitivitySlider.setPosition(sensitivityBar.getPosition().x,
+                                                                      sensitivitySlider.getPosition().y);
                                     }
-                                    else if (sensitivitySlider.getPosition().x > sensitivityBar.getPosition().x + sensitivityBar.getSize().x - sensitivitySlider.getRadius() * 2)
+                                    else if (sensitivitySlider.getPosition().x > sensitivityBar.getPosition().x +
+                                                                                     sensitivityBar.getSize().x -
+                                                                                     sensitivitySlider.getRadius() * 2)
                                     {
-                                        sensitivitySlider.setPosition(sensitivityBar.getPosition().x + sensitivityBar.getSize().x - sensitivitySlider.getRadius() * 2, sensitivitySlider.getPosition().y);
+                                        sensitivitySlider.setPosition(sensitivityBar.getPosition().x +
+                                                                          sensitivityBar.getSize().x -
+                                                                          sensitivitySlider.getRadius() * 2,
+                                                                      sensitivitySlider.getPosition().y);
                                     }
 
-
-                                    //volume slider range
+                                    // volume slider range
                                     if (volumeSlider.getPosition().x < volumeBar.getPosition().x)
                                     {
-                                        volumeSlider.setPosition(volumeBar.getPosition().x, volumeSlider.getPosition().y);
+                                        volumeSlider.setPosition(volumeBar.getPosition().x,
+                                                                 volumeSlider.getPosition().y);
                                     }
-                                    else if (volumeSlider.getPosition().x > volumeBar.getPosition().x + volumeBar.getSize().x - volumeSlider.getRadius() * 2)
+                                    else if (volumeSlider.getPosition().x > volumeBar.getPosition().x +
+                                                                                volumeBar.getSize().x -
+                                                                                volumeSlider.getRadius() * 2)
                                     {
-                                        volumeSlider.setPosition(volumeBar.getPosition().x + volumeBar.getSize().x - volumeSlider.getRadius() * 2, volumeSlider.getPosition().y);
+                                        volumeSlider.setPosition(volumeBar.getPosition().x + volumeBar.getSize().x -
+                                                                     volumeSlider.getRadius() * 2,
+                                                                 volumeSlider.getPosition().y);
                                     }
 
-
-                                    //main option thickness
+                                    // main option thickness
                                     sensitivityText.setOutlineThickness((selectedSlider == 0) ? 4.0f : 0);
                                     volumeText.setOutlineThickness((selectedSlider == 1) ? 4.0f : 0);
                                     gameDifficulty.setOutlineThickness((selectedSlider == 2) ? 4.0f : 0);
 
-                                    //difficulty thickness
+                                    // difficulty thickness
                                     d1.setOutlineThickness((selectedDiff == 0) ? 4.0f : 0);
                                     d2.setOutlineThickness((selectedDiff == 1) ? 4.0f : 0);
                                     d3.setOutlineThickness((selectedDiff == 2) ? 4.0f : 0);
                                 }
-
                             }
                             Play.close();
                             About.close();
@@ -363,19 +375,19 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                             Options.display();
                         }
                     }
-                    //about chosen
+                    // about chosen
                     if (x == 2)
                     {
                         while (About.isOpen())
                         {
-                            //minimalize menu
+                            // minimalize menu
                             ShowWindow(hwnd, SW_MINIMIZE);
                             sf::Event aevent;
                             while (About.pollEvent(aevent))
                             {
                                 if (aevent.type == sf::Event::Closed)
                                 {
-                                    //bring back menu
+                                    // bring back menu
                                     ShowWindow(hwnd, SW_NORMAL);
                                     About.close();
                                 }
@@ -383,7 +395,7 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                                 {
                                     if (aevent.key.code == sf::Keyboard::Escape)
                                     {
-                                        //bring back menu
+                                        // bring back menu
                                         ShowWindow(hwnd, SW_NORMAL);
                                         About.close();
                                     }
@@ -396,7 +408,7 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
                             About.display();
                         }
                     }
-                    //quit game
+                    // quit game
                     if (x == 3)
                     {
                         MENU.close();
@@ -413,7 +425,7 @@ void handleMenuEvents(sf::RenderWindow& MENU, MainMenu& mainMenu, sf::Sound& men
     }
 }
 
-struct MenuContext 
+struct MenuContext
 {
     sf::Sound menuSound;
     int lastScore;
@@ -425,22 +437,20 @@ struct MenuContext
     sf::Font font;
 };
 
-
-
 void runMenuLoop()
 {
     MenuContext menuContext;
 
-    //lobby music
+    // lobby music
     sf::SoundBuffer lobbySound;
     if (!lobbySound.loadFromFile("assets/lobbySnoop.wav"))
     {
-        std::cerr << "ERROR::PLAYER::INITSOUND::Could not load sound file:assets/lobbySnoop.wav" << std::endl;;
+        std::cerr << "ERROR::PLAYER::INITSOUND::Could not load sound file:assets/lobbySnoop.wav" << std::endl;
+        ;
     }
     menuContext.menuSound.setBuffer(lobbySound);
     menuContext.menuSound.play();
     menuContext.menuSound.setLoop(true);
-
 
     sf::RenderWindow MENU;
     sf::Texture menuTexture;
@@ -465,31 +475,34 @@ void runMenuLoop()
     menuContext.pressEnter.setCharacterSize(100);
     menuContext.pressEnter.setPosition(100, 300);
 
-    //settings window assets
+    // settings window assets
     sf::RectangleShape settingsBackground;
     settingsBackground.setSize(sf::Vector2f(MENU_WIDTH, MENU_HEIGHT));
     sf::Texture settingsTexture;
     settingsTexture.loadFromFile("assets/settings.png");
     settingsBackground.setTexture(&settingsTexture);
 
-    //about window assets
+    // about window assets
     sf::RectangleShape aboutBackground;
     aboutBackground.setSize(sf::Vector2f(MENU_WIDTH, MENU_HEIGHT));
     sf::Texture aboutTexture;
     aboutTexture.loadFromFile("assets/info.png");
     aboutBackground.setTexture(&aboutTexture);
 
-    //menu loop
-    
+    // menu loop
+    MainMenu mainMenu(MENU_WIDTH, MENU_HEIGHT);
+    handleMenuEvents(MENU, mainMenu, menuContext.menuSound, menuContext.lastScore, menuContext.playBackground,
+                     menuContext.pressEnter, settingsBackground, aboutBackground, menuContext.font,
+                     menuContext.background);
 }
 
 int main()
 {
-    //hide console while running
+    // hide console while running
     HWND hwnd = GetConsoleWindow();
     ShowWindow(hwnd, 0);
 
-    //run menu
+    // run menu
     runMenuLoop();
     return EXIT_SUCCESS;
 }
